@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eu
+set -o pipefail
+
 if [ "$EUID" -ne 0 ]
   then echo "The install script must be run as root"
   exit 1
@@ -17,6 +20,8 @@ echo "Enter the encryption passphrase:"
 read -r BACKUP_ENCRYPTION_PASSPHRASE
 echo "Enter a comma-separated list of directories in your home folder to ignore:"
 read -r IGNORED_FOLDERS
+echo "Enter an hour at which the backup should be made. Backups are made daily."
+read -r BACKUP_HOUR
 
 cat <<EOF > ${HOME}/.backup_envrc
 export BACKUP_DESTINATION="${BACKUP_DESTINATION}"
@@ -33,5 +38,5 @@ chmod +x /usr/local/bin/backup_home.sh
 cat <<EOF > /etc/cron.d/backup_home
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-0 11 * * * root backup_home.sh"
+0 ${BACKUP_HOUR} * * * root backup_home.sh"
 EOF

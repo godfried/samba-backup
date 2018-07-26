@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BashSupportProjectSettings">
+    <option name="globalVariables">
+      <set>
+        <option value="BACKUP_DESTINATION" />
+        <option value="BACKUP_ENCRYPTION_PASSPHRASE" />
+        <option value="BACKUP_FOLDER" />
+        <option value="BACKUP_MOUNT_POINT" />
+        <option value="IGNORED_FOLDERS" />
+        <option value="SMB_PASSWORD" />
+        <option value="SMB_USERNAME" />
+      </set>
+    </option>
+  </component>
+</project>

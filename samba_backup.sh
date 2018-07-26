@@ -7,13 +7,10 @@ if [ "$#" -ne 1 ]; then
     echo "This script must be executed with exactly one parameter: the path to .backup_envrc."
     exit 1
 fi
-BACKUP_ENVRC=${1}
-if [ "${BACKUP_ENVRC}" != *.backup_envrc ]; then
-    echo "Invalid .backup_envrc file ${BACKUP_ENVRC}."
-    exit 1
-fi
 
-export NOBACKUP=".nobackup"
+BACKUP_ENVRC=${1}
+NOBACKUP=".nobackup"
+
 source "${BACKUP_ENVRC}"
 
 [ -z "${SMB_USERNAME}" ] && exit 1

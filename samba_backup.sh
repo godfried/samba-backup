@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 set -o pipefail
 
 if [ "$#" -ne 1 ]; then
@@ -13,13 +13,12 @@ NOBACKUP=".nobackup"
 
 source "${BACKUP_ENVRC}"
 
-[ -z "${SMB_USERNAME}" ] && exit 1
-[ -z "${SMB_PASSWORD}" ] && exit 1
-[ -z "${BACKUP_ENCRYPTION_PASSPHRASE}" ] && exit 1
-[ -z "${BACKUP_DESTINATION}" ] && exit 1
-[ -z "${BACKUP_MOUNT_POINT}" ] && exit 1
-[ -z "${BACKUP_FOLDER}" ] && exit 1
-[ -z "${IGNORED_FOLDERS}" ] && exit 1
+[ -z "${SMB_USERNAME}" ] && (echo "Samba username not set."; exit 1)
+[ -z "${SMB_PASSWORD}" ] && (echo "Samba password not set."; exit 1)
+[ -z "${BACKUP_ENCRYPTION_PASSPHRASE}" ] && (echo "Backup encryption passphrase not set."; exit 1)
+[ -z "${BACKUP_DESTINATION}" ] && (echo "Backup destination not set.";  exit 1)
+[ -z "${BACKUP_MOUNT_POINT}" ] && (echo "Backup mount point not set."; exit 1)
+[ -z "${BACKUP_FOLDER}" ] && (echo "Backup folder not set."; exit 1)
 
 if [[ ! "$(findmnt -rno SOURCE,TARGET ${BACKUP_DESTINATION})" ]]; then
   if [ ! -d "${BACKUP_MOUNT_POINT}" ]; then
